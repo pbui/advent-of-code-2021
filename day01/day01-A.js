@@ -7,8 +7,10 @@ const IO = imports.io;
 
 // Functions
 
-function count_increasing_depths(report) {
-    return report.slice(1).filter((value, index) => (value > report[index])).length;
+function count_increasing_depths(report, length = 1) {
+    return report.slice(0, report.length - length + 1).filter(
+    	(value, index) => (value < report[index + length])
+    ).length;
 }
 
 // Main Execution
