@@ -31,15 +31,12 @@ function for_each_line(thunk, stream = Stdin) {
 // Functions
 
 function count_increasing_depths(report) {
-    let increases = report.slice(1).filter(
-    	(value, index) => (value > report[index])
-    );
-    return increases.length;
+    return report.slice(1).filter((value, index) => (value > report[index])).length;
 }
 
 function group_windows(report, length = 3) {
     return report.slice(0, report.length - length + 1).map(
-    	(value, index) => report.slice(index, index + length).reduce((a, b) => (a + b), 0);
+    	(value, index) => report.slice(index, index + length).reduce((a, b) => (a + b), 0)
     );
 }
 
