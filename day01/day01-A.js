@@ -31,18 +31,10 @@ function for_each_line(thunk, stream = Stdin) {
 // Functions
 
 function count_increasing_depths(report) {
-    let increases      = 0;
-    let previous_depth = report.shift();
-
-    while (report.length) {
-    	let current_depth = report.shift();
-    	if (current_depth > previous_depth) {
-    	    increases++;
-	}
-	previous_depth = current_depth;
-    }
-
-    return increases;
+    let increases = report.slice(1).filter(
+    	(value, index) => (value > report[index])
+    );
+    return increases.length;
 }
 
 // Main Execution

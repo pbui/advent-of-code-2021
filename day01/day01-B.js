@@ -31,27 +31,16 @@ function for_each_line(thunk, stream = Stdin) {
 // Functions
 
 function count_increasing_depths(report) {
-    let increases      = 0;
-    let previous_depth = report.shift();
-
-    while (report.length) {
-    	let current_depth = report.shift();
-    	if (current_depth > previous_depth) {
-    	    increases++;
-	}
-	previous_depth = current_depth;
-    }
-
-    return increases;
+    let increases = report.slice(1).filter(
+    	(value, index) => (value > report[index])
+    );
+    return increases.length;
 }
 
 function group_windows(report, length = 3) {
-    let windows = [];
-    for (let i = 0; i <= report.length - length; i++) {
-    	let sum = report.slice(i, i + length).reduce((a, b) => (a + b), 0);
-    	windows.push(sum);
-    }
-    return windows;
+    return report.slice(0, report.length - length + 1).map(
+    	(value, index) => report.slice(index, index + length).reduce((a, b) => (a + b), 0);
+    );
 }
 
 // Main Execution
