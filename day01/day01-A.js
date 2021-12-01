@@ -2,8 +2,8 @@
 
 // Imports
 
-imports.searchPath.unshift('.');
-const Utils = imports.utils;
+imports.searchPath.unshift('../common');
+const IO = imports.io;
 
 // Functions
 
@@ -13,6 +13,6 @@ function count_increasing_depths(report) {
 
 // Main Execution
 
-let report    = Utils.read_lines(parseInt);
+let report    = IO.readlines(parseInt);
 let increases = count_increasing_depths(report);
-Utils.println(increases);
+IO.print(increases);

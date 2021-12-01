@@ -2,8 +2,8 @@
 
 // Imports
 
-imports.searchPath.unshift('.');
-const Utils = imports.utils;
+imports.searchPath.unshift('../common');
+const IO = imports.io;
 
 // Functions
 
@@ -19,7 +19,7 @@ function group_windows(report, length = 3) {
 
 // Main Execution
 
-let report    = Utils.read_lines(parseInt);
+let report    = IO.readlines(parseInt);
 let windows   = group_windows(report);
 let increases = count_increasing_depths(windows);
-Utils.println(increases);
+IO.print(increases);

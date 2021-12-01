@@ -15,11 +15,11 @@ let Stdout = new Gio.DataOutputStream({
 
 // Utilities
 
-function println(object) {
+function print(object) {
     Stdout.write(object + '\n', null);
 }
 
-function read_lines(thunk, stream = Stdin) {
+function readlines(thunk, stream = Stdin) {
     let lines = [];
     for_each_line(line => {
 	lines.push(thunk(line));
