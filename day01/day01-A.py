@@ -2,13 +2,15 @@
 
 import sys
 
+# Constants
+
+WINDOW = 1
+
 # Main Execution
 
 def main():
     report    = [int(depth) for depth in sys.stdin]
-    increases = sum(
-        1 for i in range(1, len(report)) if report[i] > report[i - 1]
-    )
+    increases = sum(1 for i in range(WINDOW, len(report)) if report[i] > report[i - WINDOW])
     print(increases)
 
 if __name__ == '__main__':
