@@ -8,12 +8,13 @@ def process_commands(commands):
     position, depth = 0, 0
 
     for direction, magnitude in commands:
+        magnitude = int(magnitude)
         if direction == 'forward':
-            position += int(magnitude)
+            position += magnitude
         elif direction == 'down':
-            depth += int(magnitude)
+            depth += magnitude
         elif direction == 'up':
-            depth -= int(magnitude)
+            depth -= magnitude
 
     return position, depth
 
