@@ -19,10 +19,14 @@ function print(object) {
     Stdout.write(object + '\n', null);
 }
 
-function readlines(thunk, stream = Stdin) {
+function readlines(thunk = null, stream = Stdin) {
     let lines = [];
     for_each_line(line => {
-	lines.push(thunk(line));
+    	if (thunk == null) {
+	    lines.push(line);
+	} else {
+	    lines.push(thunk(line));
+	}
     });
     return lines;
 }
