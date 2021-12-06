@@ -31,9 +31,21 @@ function readlines(thunk = null, stream = Stdin) {
     return lines;
 }
 
-function for_each_line(thunk, stream = Stdin) {
-    for (let [line, length] = stream.read_line(null); length; [line, length] = stream.read_line(null)) {
+function readline(thunk = null, stream = Stdin) {
+    let [line, length] = stream.read_line(null);
+    if (length) {
     	let string = ByteArray.toString(line);
-    	thunk(string);
+    	if (thunk != null) {
+	    string = thunk(string);
+	}
+
+	return string;
+    }
+    return null;
+}
+
+function for_each_line(thunk, stream = Stdin) {
+    for (let line = readline(null, stream); line; line = readline(null, stream)) {
+    	thunk(line);
     }
 }
