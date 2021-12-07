@@ -13,7 +13,7 @@ function distance(d) {
 
 // Main Execution
 
-let crabs = IO.readline(line => line.split(',').map(n => parseInt(n, 10)));
+let crabs          = IO.readline(line => line.split(',').map(n => parseInt(n, 10)));
 let min_position   = Math.min(...crabs);
 let max_position   = Math.max(...crabs);
 let min_fuel_costs = Number.MAX_SAFE_INTEGER;
