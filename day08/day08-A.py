@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import collections
 import sys
 
 # Constants
@@ -15,10 +14,7 @@ SEGMENTS_COUNT_TO_DIGIT = {
 # Functions
 
 def count_1478_outputs(outputs):
-    return sum(
-        1 if len(collections.Counter(output)) in SEGMENTS_COUNT_TO_DIGIT else 0
-        for output in outputs
-    )
+    return sum(1 if len(output) in SEGMENTS_COUNT_TO_DIGIT else 0 for output in outputs)
 
 # Main Execution
 
