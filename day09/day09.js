@@ -26,14 +26,14 @@ function find_low_points(heatmap) {
     let low_points = [];
 
     for (let row = 1; row < heatmap.length - 1; row++) {
-	for (let col = 1; col < heatmap[0].length - 1; col++) {
-    	    let is_lower = DIRECTIONS.filter(([dr, dc]) => 
-    	    	heatmap[row][col] < heatmap[row + dr][col + dc]
-	    );
-	    if (is_lower.length == DIRECTIONS.length) {
-	    	low_points.push([heatmap[row][col], row, col]);
-	    }
-	}
+        for (let col = 1; col < heatmap[0].length - 1; col++) {
+            let is_lower = DIRECTIONS.filter(([dr, dc]) =>
+                heatmap[row][col] < heatmap[row + dr][col + dc]
+            );
+            if (is_lower.length == DIRECTIONS.length) {
+                low_points.push([heatmap[row][col], row, col]);
+            }
+        }
     }
 
     return low_points;
@@ -48,20 +48,20 @@ function walk_heatmap(heatmap, start) {
     let visited  = new Set();
 
     while (frontier.length) {
-    	let [row, col] = frontier.shift();
-    	let node_id    = row*heatmap[0].length + col;
+        let [row, col] = frontier.shift();
+        let node_id    = row*heatmap[0].length + col;
 
-    	if (visited.has(node_id)) {
-    	    continue;
-	}
+        if (visited.has(node_id)) {
+            continue;
+        }
 
-	visited.add(node_id);
+        visited.add(node_id);
 
-	DIRECTIONS.map(([dr, dc]) => {
-	    if (heatmap[row + dr][col + dc] < MAX) {
-	    	frontier.push([row + dr, col + dc]);
-	    }
-	});
+        DIRECTIONS.map(([dr, dc]) => {
+            if (heatmap[row + dr][col + dc] < MAX) {
+                frontier.push([row + dr, col + dc]);
+            }
+        });
     }
 
     return visited.size;
