@@ -31,7 +31,7 @@ function find_low_points(heatmap) {
     	    	heatmap[row][col] < heatmap[row + dr][col + dc]
 	    );
 	    if (is_lower.length == DIRECTIONS.length) {
-	    	low_points.push(heatmap[row][col]);
+	    	low_points.push([heatmap[row][col], row, col]);
 	    }
 	}
     }
@@ -39,11 +39,42 @@ function find_low_points(heatmap) {
     return low_points;
 }
 
+function find_basins(heatmap, low_points) {
+    return low_points.map(([_, row, col]) => walk_heatmap(heatmap, [row, col]));
+}
+
+function walk_heatmap(heatmap, start) {
+    let frontier = [start];
+    let visited  = new Set();
+
+    while (frontier.length) {
+    	let [row, col] = frontier.shift();
+    	let node_id    = row*heatmap[0].length + col;
+
+    	if (visited.has(node_id)) {
+    	    continue;
+	}
+
+	visited.add(node_id);
+
+	DIRECTIONS.map(([dr, dc]) => {
+	    if (heatmap[row + dr][col + dc] < MAX) {
+	    	frontier.push([row + dr, col + dc]);
+	    }
+	});
+    }
+
+    return visited.size;
+}
+
 // Main Execution
 
 let heatmap    = padmap(IO.readlines(line => line.split('').map(n => parseInt(n, 10))));
 let low_points = find_low_points(heatmap);
-let part_a     = low_points.reduce((t, p) => t + p + 1, 0);
 
+let part_a     = low_points.reduce((t, p) => t + p[0] + 1, 0);
 IO.print(`Part A: ${part_a}`);
+
+let basins     = find_basins(heatmap, low_points);
+let part_b     = basins.sort((a, b) => b - a).slice(0, 3).reduce((s, n) => s * n, 1);
 IO.print(`Part B: ${part_b}`);
