@@ -57,7 +57,7 @@ function walk_heatmap(heatmap, start) {
 
         visited.add(node_id);
 
-        DIRECTIONS.map(([dr, dc]) => {
+        DIRECTIONS.forEach(([dr, dc]) => {
             if (heatmap[row + dr][col + dc] < MAX) {
                 frontier.push([row + dr, col + dc]);
             }
