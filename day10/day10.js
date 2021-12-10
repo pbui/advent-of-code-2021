@@ -8,7 +8,7 @@ const IO = imports.io;
 // Constants
 
 const OPENING_BRACKETS = {
-    '(': ')', 
+    '(': ')',
     '[': ']',
     '{': '}',
     '<': '>',
@@ -34,10 +34,10 @@ function parse_line(line) {
     let stack = [];
 
     for (let bracket of line) {
-    	if (bracket in OPENING_BRACKETS) {  // Opening bracket
+    	if (bracket in OPENING_BRACKETS) {
     	    stack.push(bracket);
-	} else {			    // Closing bracket
-	    if (!stack.length) {	    // Incomplete: missing closing bracket
+	} else {
+	    if (!stack.length) {
 	    	return [0, stack];
 	    }
 
