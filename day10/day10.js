@@ -34,18 +34,18 @@ function parse_line(line) {
     let stack = [];
 
     for (let bracket of line) {
-    	if (bracket in OPENING_BRACKETS) {
-    	    stack.push(bracket);
-	} else {
-	    if (!stack.length) {
-	    	return [0, stack];
-	    }
+        if (bracket in OPENING_BRACKETS) {
+            stack.push(bracket);
+        } else {
+            if (!stack.length) {
+                return [0, stack];
+            }
 
-	    let previous = stack.pop();
-	    if (bracket != OPENING_BRACKETS[previous]) {
-	    	return [CLOSING_BRACKETS[bracket], null];
-	    }
-	}
+            let previous = stack.pop();
+            if (bracket != OPENING_BRACKETS[previous]) {
+                return [CLOSING_BRACKETS[bracket], null];
+            }
+        }
     }
 
     return [0, stack];
@@ -62,8 +62,8 @@ let part_a = lines.reduce((s, l) => s + parse_line(l)[0], 0);
 IO.print(`Part A: ${part_a}`);
 
 let scores = lines.map(parse_line)
-		  .filter(p => !p[0])
-		  .map(p => complete_line(p[1]))
-		  .sort((a, b) => (a - b));
+                  .filter(p => !p[0])
+                  .map(p => complete_line(p[1]))
+                  .sort((a, b) => (a - b));
 let part_b = scores[Math.floor(scores.length / 2)];
 IO.print(`Part B: ${part_b}`);
